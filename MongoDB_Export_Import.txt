@@ -1,0 +1,29 @@
+// https://www.geeksforgeeks.org/export-data-from-mongodb/
+// https://database.guide/how-to-export-mongodb-query-results-to-a-csv-file/
+// https://docs.mongodb.com/database-tools/mongoexport/
+// https://hevodata.com/learn/export-mongodb-to-excel-csv/
+
+##################
+Command:
+mongoexport --username <username> --password <passowrd> --authenticationDatabase <authDB> --authenticationMechanism <encriptionMechanism> --readPreference=secondary --host <mongodb://host> --port <port> --db <connectionDB> --collection <collectionName> --type=<format> --limit=100 --skip=100 -o <output-file-name.extension>
+
+
+!!!!!!! DEV !!!!!!!
+Sample Command:> 
+> mongoexport --host awaos-dev-general01-mongo.cloud.operative.com --port 27017 --db demo_ratecard --collection ratecard --type=csv --fields=_id,pricingDemo.displayName --limit=100 --skip=0 --out=ratecard_csv.csv
+> mongoimport ratecard_csv.csv -d devfox_ratecard -c datadump_28Jul --drop
+!!!!!!!!!!!!!!!!!!!!!
+
+!!!!!!! LOCAL !!!!!!!
+Command:> 
+
+// Ratecard - FORMAT: CSV
+> mongoexport --db demo_ratecard --collection ratecard --type=csv --fields=_id,pricingDemo.displayName --limit=100 --skip=0 --out=ratecard_csv.csv
+> mongoimport ratecard_csv.csv -d devfox_ratecard -c ratecard_datadump_28Jul --drop
+
+// datadump ppp's - FORMAT: JSON
+> mongoexport --db demo_ratecard --collection ratecard_28Jul --type=json --limit=100 --skip=0 --out=ppp_ratecard_28Jul.json
+> mongoimport ppp_ratecard_28Jul.json -d devfox_ratecard -c datadump_28Jul --drop
+!!!!!!!!!!!!!!!!!!!!!
+
+##################
