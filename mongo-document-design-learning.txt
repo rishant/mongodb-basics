@@ -1,1 +1,5 @@
 http://learnmongodbthehardway.com/schema/sharding/
+
+http://learnmongodbthehardway.com/schema/shoppingcartreservation/
+http://learnmongodbthehardway.com/schema/shoppingcartnoreservation/
+http://learnmongodbthehardway.com/schema/theater/
