@@ -1,0 +1,28 @@
+!!Mongo Compound Indexing Learning !!
+https://www.youtube.com/watch?v=e2GskeKG6hQ
+
+db.products.createIndex({"manufacturer" : 1, "price" : -1})
+
+db.products.insertMany([
+{"name" : "iPad", "category" : "Tablet", "manufacturer" : "Apple", "price" : 800},
+{"name" : "Nexus", "category" : "Phone", "manufacturer" : "Google", "price" : 500},
+{"name" : "iPhone", "category" : "Phone", "manufacturer" : "Apple", "price" : 600},
+{"name" : "iPadPro", "category" : "Tablet", "manufacturer" : "Apple", "price" : 900}
+])
+
+Available indexes are:
+1. _id
+2. manufacturer_1_price_-1
+
+Created Compound Index:
+db.products.createIndex({"manufacturer" : 1, "price" : -1})
+
+Mongo Use Compound Index: IXSCAN
+db.getCollection('products').find({}).sort({"manufacturer" : 1, "price" : -1}).explain()
+db.getCollection('products').find({}).sort({"manufacturer" : -1, "price" : 1}).explain()
+db.getCollection('products').find({}).sort({"manufacturer" : 1}).explain()
+
+Mongo Not Use Compound Index: COLSCAN
+db.getCollection('products').find({}).sort({"manufacturer" : 1, "price" : 1}).explain()
+db.getCollection('products').find({}).sort({"manufacturer" : -1, "price" : -1}).explain()
+db.getCollection('products').find({}).sort({"price" : 1}).explain()
